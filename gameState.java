@@ -19,8 +19,26 @@ public class gameState {
         }
     }
 
-    public void draw(card Card){
-        drawPile.add(Card);
+    public void draw(card card){
+        drawPile.add(card);
+    }
+
+    public void moveCard(int first, int second){
+        ArrayList<card> moveCards = new ArrayList<>();
+        for(int i = 0; i<gameBoard.length; ++i){
+            if(gameBoard[i][first].getVisible){
+                moveCards.add(gameBoard[i][first]);
+                gameBoard[i][first] = null;
+            }
+        }
+
+        int cnt = 0;
+        for(int i = 0; i<gameBoard.length; ++i){
+            if(gameBoard[i][second] == null){
+                gameBoard[i][second] = moveCards.get(cnt);
+                ++cnt;
+            }
+        }
     }
 
 }

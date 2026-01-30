@@ -21,4 +21,7 @@ public class card {
     public boolean getVisibiliy(){
         return visible;
     }
+    public void flip(){
+        visible=!visible;
+    }
 }

@@ -7,10 +7,11 @@ public class deck {
         cardDeck = new ArrayList<>();
         int cnt = 1;
         while (cnt < 14) {
-            cardDeck.add(new card(cnt, "s", "r"));
-            cardDeck.add(new card(cnt, "h", "r"));
-            cardDeck.add(new card(cnt, "s", "b"));
-            cardDeck.add(new card(cnt, "c", "b"));
+            cardDeck.add(new card(cnt, "d", "r", false));
+            cardDeck.add(new card(cnt, "h", "r", false));
+            cardDeck.add(new card(cnt, "s", "b", false));
+            cardDeck.add(new card(cnt, "c", "b", false));
+            cnt++;
         }
     }
 
@@ -38,8 +39,8 @@ public class deck {
         shuffle();
     }
 
-    public card[] getdeck() {
-        return (card[]) cardDeck.toArray();
+    public ArrayList<card> getdeck() {
+        return cardDeck;
     }
 
 }

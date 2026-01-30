@@ -8,10 +8,6 @@ public class card {
         suit=s;
         color=c;
         visible=vis;
-    public card(int v,String s, String c){
-        value=v;
-        suit=s;
-        color=c;
     }
     public int getValue(){
         return value;

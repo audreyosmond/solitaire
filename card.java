@@ -2,10 +2,12 @@ public class card {
     private int value;
     private String suit;
     private String color;
-    public card(int v,String s, String c){
+    private boolean visible;
+    public card(int v,String s, String c, boolean vis){
         value=v;
         suit=s;
         color=c;
+        visible=vis;
     }
     public int getValue(){
         return value;
@@ -15,5 +17,11 @@ public class card {
     }
     public String getColor(){
         return color;
+    }
+    public boolean getVisibiliy(){
+        return visible;
+    }
+    public void flip(){
+        visible=!visible;
     }
 }

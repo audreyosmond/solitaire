@@ -1,0 +1,46 @@
+import java.util.*;
+
+public class deck {
+    private ArrayList<card> cardDeck;
+
+    public deck() {
+        cardDeck = new ArrayList<>();
+        int cnt = 1;
+        while (cnt < 14) {
+            cardDeck.add(new card(cnt, "d", "r", false));
+            cardDeck.add(new card(cnt, "h", "r", false));
+            cardDeck.add(new card(cnt, "s", "b", false));
+            cardDeck.add(new card(cnt, "c", "b", false));
+            cnt++;
+        }
+    }
+
+    public card draw() {
+        int ran = (int) (Math.random() * cardDeck.size());
+        card temp = cardDeck.get(ran);
+        cardDeck.remove(ran);
+        return temp;
+    }
+
+    public void shuffle() {
+        for (int lcv = 0; lcv < cardDeck.size(); lcv++) {
+            int ran = (int) (Math.random() * cardDeck.size());
+            card temp = cardDeck.get(ran);
+            card ind = cardDeck.get(lcv);
+            cardDeck.set(lcv, temp);
+            cardDeck.set(ran, ind);
+        }
+    }
+
+    public void shuffledraw(card[] cards) {
+        for (card c : cards) {
+            cardDeck.add(c);
+        }
+        shuffle();
+    }
+
+    public ArrayList<card> getdeck() {
+        return cardDeck;
+    }
+
+}

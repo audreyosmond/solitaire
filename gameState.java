@@ -9,7 +9,8 @@ public class gameState {
     public gameState() {
     }
 
-    public void newGame(card[] cards) {
+    public void newGame() {
+        card[] cards = deck.newGame();
         int cnt = 0;
         for (int i = 0; i < gameBoard[0].length; ++i) {
             for (int j = 0; j <= i; ++j) {
@@ -43,7 +44,7 @@ public class gameState {
             return;
         }
 
-        if (!currentCard.getColor().equals(futureCard.getColor())
+        if (currentCard.getVisibiliy() && !currentCard.getColor().equals(futureCard.getColor())
                 && currentCard.getValue() < futureCard.getValue() - 1) {
             moveCard(first, second, cardNumber);
         } else {
@@ -81,5 +82,5 @@ public class gameState {
 
 
 
-    
+
 }

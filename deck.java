@@ -17,8 +17,7 @@ public class deck {
 
     public card draw() {
         int ran = (int) (Math.random() * cardDeck.size());
-        card temp = cardDeck.get(ran);
-        cardDeck.remove(ran);
+        card temp = cardDeck.remove(ran);
         return temp;
     }
 
@@ -41,6 +40,14 @@ public class deck {
 
     public ArrayList<card> getdeck() {
         return cardDeck;
+    }
+
+    public card[] newGame(){
+        card[] gameCards = new card[28];
+        for(int i = 0; i<gameCards.length; ++i){
+            gameCards[i] = draw();
+        }
+        return gameCards;
     }
 
 }

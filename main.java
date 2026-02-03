@@ -11,6 +11,8 @@ public class main {
         //input
         Scanner input=new Scanner(System.in);
         while(playing){
+            game.printBoard();
+
             System.out.print("Move card, Draw card, or Score card? ");
             String choice=input.next();
             System.out.println();
@@ -33,7 +35,9 @@ public class main {
                 game.draw();
             }
             if(choice.equals("score")){
-
+                System.out.print("Which card are you scoring? ");
+                int cardNumber=input.nextInt();
+                game.score(cardNumber);
             }
         }
     }

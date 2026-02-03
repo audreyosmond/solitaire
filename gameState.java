@@ -23,8 +23,8 @@ public class gameState {
         }
     }
 
-    public void draw(card card) {
-        drawPile.add(card);
+    public void draw() {
+        drawPile.add(deck.draw());
     }
 
     public void validateMoveCard(int first, int second, int cardNumber) {
@@ -80,7 +80,30 @@ public class gameState {
         }
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////
+    //PRINTING METHODS
+
+    public void printBoard(){
+        String[] cards = Constants.Killme;
 
 
 
+
+        int cnt = 0;
+    //increment through the layers of the cards
+    for(int k = 0; k < 9; ++k){
+        //increment through the columns of the board
+     for(int i = 0; i<gameBoard[0].length; ++i){
+        //increment through the Cards in the array 
+        for(int j = 0; j < cards.length-1; ++j){
+            if(cards[j].equals(Player.get(i).getCard())){
+                String me = cards[j+1].substring(cnt, cnt + 11);
+                System.out.print(me);
+            }
+        }
+    }
+    System.out.println();
+    cnt += 11;
+}
+    }
 }

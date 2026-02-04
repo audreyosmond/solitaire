@@ -35,9 +35,12 @@ public class main {
                 game.draw();
             }
             if(choice.equals("score")){
+                System.out.print("Which column are you scoring from? ");
+                int column=input.nextInt();
+                System.out.println();
                 System.out.print("Which card are you scoring? ");
                 int cardNumber=input.nextInt();
-                game.score(cardNumber);
+                game.score(column , cardNumber);
             }
         }
     }

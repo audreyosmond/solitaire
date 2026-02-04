@@ -84,11 +84,18 @@ public class gameState {
     //PRINTING METHODS
 
     public void printBoard(){
-        String[] cards = Constants.Killme;
+        String[] cards = Constants.cardFaces;
 
+        for(int i = 0; i<gameBoard.length; ++i){
+            for(int j = 0; j<gameBoard[0].length; ++j){
+                String cardOn = gameBoard[i][j].getValue() + gameBoard[i][j].getSuit(); 
+                for(int k = 0; k<cards.length; ++k){
+                    
+                }
+            }
+        }
 
-
-
+        /* 
         int cnt = 0;
     //increment through the layers of the cards
     for(int k = 0; k < 9; ++k){
@@ -105,5 +112,6 @@ public class gameState {
     System.out.println();
     cnt += 11;
 }
+    */
     }
 }

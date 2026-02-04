@@ -13,16 +13,7 @@ public class gameState {
         boolean ace = curcard.getValue()==1;
         int r=-1;
         int cr=-1;
-        for(card []  c: scoring){
-            r++;
-            for(card cd: c){
-                cr++;
-                if(cd.getSuit().equals(shape)&&curcard.getValue()+1==cd.getValue()){
-                    scoring[r+1][cr]=curcard;
-                    return;
-                }
-            }
-        }
+
         if(curcard.getSuit().equals("h")&&ace){
             scoring[0][0]=curcard;
         }
@@ -35,6 +26,18 @@ public class gameState {
         else{
             scoring[0][3]=curcard;
         }
+
+        for(card []  c: scoring){
+            r++;
+            for(card cd: c){
+                cr++;
+                if(cd.getSuit().equals(shape)&&curcard.getValue()==cd.getValue()+1){
+                    scoring[r+1][cr]=curcard;
+                    return;
+                }
+            }
+        }
+        
         
     }
     public void newGame() {

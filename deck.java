@@ -7,10 +7,10 @@ public class deck {
         cardDeck = new ArrayList<>();
         int cnt = 1;
         while (cnt < 14) {
-            cardDeck.add(new card(cnt, "d", "r", false));
-            cardDeck.add(new card(cnt, "h", "r", false));
-            cardDeck.add(new card(cnt, "s", "b", false));
-            cardDeck.add(new card(cnt, "c", "b", false));
+            cardDeck.add(new card(cnt, "Diamonds", "r", false));
+            cardDeck.add(new card(cnt, "Hearts", "r", false));
+            cardDeck.add(new card(cnt, "Spades", "b", false));
+            cardDeck.add(new card(cnt, "Clubs", "b", false));
             cnt++;
         }
     }

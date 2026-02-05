@@ -23,8 +23,8 @@ public class gameState {
         }
     }
 
-    public void draw(card card) {
-        drawPile.add(card);
+    public void draw() {
+        drawPile.add(deck.draw());
     }
 
     public void validateMoveCard(int first, int second, int cardNumber) {
@@ -80,7 +80,57 @@ public class gameState {
         }
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////
+    // PRINTING METHODS
 
+    public void printBoard() {
+        String[] cards = Constants.cardFaces;
+        String cardToPrint = "";
+        int cnt = 0;
 
+        for (int i = 0; i < gameBoard.length; ++i) {
+            for (int c = 0; c < 9; c++) {
+                for (int j = 0; j < gameBoard[0].length; ++j) {
+                    if (gameBoard[i][j] == null) {
+                        continue;
+                    }
+                    // The card we need to print
+                    String cardOn = gameBoard[i][j].getValue() + gameBoard[i][j].getSuit();
+                    if(!gameBoard[i][j].getVisibiliy()){
+                        cardOn = "Empty";
+                    }
+                    // Going through all cards in cards array to find proper card to print out and
+                    // assign it to variable
+                    for (int k = 0; k < cards.length - 1; ++k) {
+                        if (cards[k].equals(cardOn)) {
+                            cardToPrint = cards[k + 1];
+                        }
+                    }
+                    // Print only section we on rn
+                    System.out.print(cardToPrint.substring(cnt, cnt + 11));
+                }
+                System.out.println();
+                cnt += 11;
+            }
+        }
 
+        /*
+         * int cnt = 0;
+         * //increment through the layers of the cards
+         * for(int k = 0; k < 9; ++k){
+         * //increment through the columns of the board
+         * for(int i = 0; i<gameBoard[0].length; ++i){
+         * //increment through the Cards in the array
+         * for(int j = 0; j < cards.length-1; ++j){
+         * if(cards[j].equals(Player.get(i).getCard())){
+         * String me = cards[j+1].substring(cnt, cnt + 11);
+         * System.out.print(me);
+         * }
+         * }
+         * }
+         * System.out.println();
+         * cnt += 11;
+         * }
+         */
+    }
 }

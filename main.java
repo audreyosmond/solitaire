@@ -5,13 +5,13 @@ public class main {
         //game setup
         gameState game = new gameState();
         deck cards=new deck();
-        game.newGame(cards.newGame());
-        boolean playing=true;
+        game.newGame();
 
         //input
         Scanner input=new Scanner(System.in);
-        while(playing){
-            game.printBoard();
+        while(true){
+            //game.printBoard();
+            game.tempPrint();
 
             System.out.print("Move card, Draw card, or Score card? ");
             String choice=input.next();
@@ -40,7 +40,7 @@ public class main {
                 System.out.println();
                 System.out.print("Which card are you scoring? ");
                 int cardNumber=input.nextInt();
-                game.score(column , cardNumber);
+                //game.score(column , cardNumber);
             }
         }
     }

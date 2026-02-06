@@ -15,8 +15,8 @@ public class gameState {
         for (int i = 0; i < gameBoard[0].length; ++i) {
             for (int j = 0; j <= i; ++j) {
                 gameBoard[j][i] = cards[cnt];
-                if (j + 1 == i) { // Possible no worky :(
-                    gameBoard[j][i-1].flip();
+                if (j == i) { // Possible no worky :(
+                    gameBoard[j][i].flip();
                 }
                 ++cnt;
             }
@@ -82,21 +82,37 @@ public class gameState {
 
     //////////////////////////////////////////////////////////////////////////////////////////////
     // PRINTING METHODS
-
     public void printBoard() {
         String[] cards = Constants.cardFaces;
         String cardToPrint = "";
-        int cnt = 0;
+
+        // Draw pile card to print
+        card drawCard = deck.getdeck().get(0);
+        String drawnCard = drawCard.getValue() + drawCard.getSuit();
+        for (int i = 0; i < cards.length; ++i) {
+            if (cards[i].equals(drawnCard)) {
+                drawnCard = cards[i + 1];
+                break;
+            }
+        }
 
         for (int i = 0; i < gameBoard.length; ++i) {
+            int cnt = 0;
             for (int c = 0; c < 9; c++) {
+                if (i >= 1) {
+                    System.out.print("           ");
+                }
+                if (i < 1) {
+                    System.out.print(drawnCard.substring(cnt, cnt + 11));
+                }
                 for (int j = 0; j < gameBoard[0].length; ++j) {
                     if (gameBoard[i][j] == null) {
+                        System.out.print("           ");
                         continue;
                     }
                     // The card we need to print
                     String cardOn = gameBoard[i][j].getValue() + gameBoard[i][j].getSuit();
-                    if(!gameBoard[i][j].getVisibiliy()){
+                    if (!gameBoard[i][j].getVisibiliy()) {
                         cardOn = "Empty";
                     }
                     // Going through all cards in cards array to find proper card to print out and
@@ -107,11 +123,14 @@ public class gameState {
                         }
                     }
                     // Print only section we on rn
+
                     System.out.print(cardToPrint.substring(cnt, cnt + 11));
                 }
+
                 System.out.println();
                 cnt += 11;
             }
+
         }
 
         /*
@@ -134,18 +153,18 @@ public class gameState {
          */
     }
 
-
-    public void tempPrint(){
-        for(int i=0;i<gameBoard.length;++i){
-            for(int j=0;j<gameBoard[i].length;++j){
-                if(gameBoard[i][j]!=null){
-                    if(gameBoard[i][j].getValue()>9){
-                        System.out.print(gameBoard[i][j].getVisibiliy()+""+gameBoard[i][j].getValue()+gameBoard[i][j].getSuit().substring(0,1)+"  ");
-                    }else{
-                        System.out.print(gameBoard[i][j].getVisibiliy()+""+gameBoard[i][j].getValue()+gameBoard[i][j].getSuit().substring(0,1)+"   ");
+    public void tempPrint() {
+        for (int i = 0; i < gameBoard.length; ++i) {
+            for (int j = 0; j < gameBoard[i].length; ++j) {
+                if (gameBoard[i][j] != null) {
+                    if (gameBoard[i][j].getValue() > 9) {
+                        System.out.print(gameBoard[i][j].getVisibiliy() + "" + gameBoard[i][j].getValue()
+                                + gameBoard[i][j].getSuit().substring(0, 1) + "  ");
+                    } else {
+                        System.out.print(gameBoard[i][j].getVisibiliy() + "" + gameBoard[i][j].getValue()
+                                + gameBoard[i][j].getSuit().substring(0, 1) + "   ");
                     }
-                }
-                else{
+                } else {
                     System.out.print("//////   ");
                 }
             }

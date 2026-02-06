@@ -14,9 +14,9 @@ public class gameState {
         int cnt = 0;
         for (int i = 0; i < gameBoard[0].length; ++i) {
             for (int j = 0; j <= i; ++j) {
-                gameBoard[i][j] = cards[cnt];
+                gameBoard[j][i] = cards[cnt];
                 if (j + 1 == i) { // Possible no worky :(
-                    gameBoard[i][j].flip();
+                    gameBoard[j][i-1].flip();
                 }
                 ++cnt;
             }
@@ -29,7 +29,7 @@ public class gameState {
 
     public void validateMoveCard(int first, int second, int cardNumber) {
         // Crating the cards we are using for checks
-        card currentCard = gameBoard[first][gameBoard.length - cardNumber]; // fix edge case
+        card currentCard = gameBoard[cardNumber][first]; // fix edge case
 
         card futureCard = null;
         for (int i = 0; i < gameBoard.length - 1; ++i) {
@@ -132,5 +132,24 @@ public class gameState {
          * cnt += 11;
          * }
          */
+    }
+
+
+    public void tempPrint(){
+        for(int i=0;i<gameBoard.length;++i){
+            for(int j=0;j<gameBoard[i].length;++j){
+                if(gameBoard[i][j]!=null){
+                    if(gameBoard[i][j].getValue()>9){
+                        System.out.print(gameBoard[i][j].getVisibiliy()+""+gameBoard[i][j].getValue()+gameBoard[i][j].getSuit().substring(0,1)+"  ");
+                    }else{
+                        System.out.print(gameBoard[i][j].getVisibiliy()+""+gameBoard[i][j].getValue()+gameBoard[i][j].getSuit().substring(0,1)+"   ");
+                    }
+                }
+                else{
+                    System.out.print("//////   ");
+                }
+            }
+            System.out.println();
+        }
     }
 }

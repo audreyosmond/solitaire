@@ -10,8 +10,8 @@ public class main {
         //input
         Scanner input=new Scanner(System.in);
         while(true){
-            //game.printBoard();
-            game.tempPrint();
+            game.printBoard();
+            //game.tempPrint();
 
             System.out.print("Move card, Draw card, or Score card? ");
             String choice=input.next();

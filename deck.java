@@ -16,8 +16,7 @@ public class deck {
     }
 
     public card draw() {
-        int ran = (int) (Math.random() * cardDeck.size());
-        card temp = cardDeck.remove(ran);
+        card temp = cardDeck.remove(0);
         return temp;
     }
 

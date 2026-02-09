@@ -11,6 +11,7 @@ public class gameState {
 
     public void newGame() {
         card[] cards = deck.newGame();
+        deck.shuffle();
         int cnt = 0;
         for (int i = 0; i < gameBoard[0].length; ++i) {
             for (int j = 0; j <= i; ++j) {
@@ -89,6 +90,55 @@ public class gameState {
         }
     }
 
+    public void validateMoveFromDraw(int second){
+        // Crating the cards we are using for checks
+        card currentCard = drawPile.peek(); // fix edge case
+        if(currentCard == null){
+            System.out.println("Invalid move");
+            return;
+        }
+
+        card futureCard = null;
+        for (int i = 0; i < gameBoard.length - 1; ++i) {
+            if (gameBoard[i + 1][second] == null) {
+                futureCard = gameBoard[i][second];
+                break;
+            }
+        }
+
+        // King case
+        if (currentCard.getValue() == 13 && futureCard == null) {
+            moveDrawCard(second);
+            return;
+        }
+
+        
+        System.out.println(currentCard.getVisibiliy());
+        System.out.println(!currentCard.getColor().equals(futureCard.getColor()));
+        System.out.println(currentCard.getValue() == futureCard.getValue() - 1);
+        if (currentCard.getVisibiliy() && !currentCard.getColor().equals(futureCard.getColor())
+                && currentCard.getValue() == futureCard.getValue() - 1) {
+            moveDrawCard(second);
+        } else {
+            System.out.println("Invalid move");
+        }
+    }
+
+    public void moveDrawCard(int second){
+        // Find and grab all cards asked for and put into ArrayList
+        ArrayList<card> moveCards = new ArrayList<>();
+        moveCards.add(drawPile.pop());
+
+        // Put the cards into desired location
+        int cnt = 0;
+        for (int i = 0; i < gameBoard.length; ++i) {
+            if (gameBoard[i][second] == null && moveCards.size() > 0) {
+                gameBoard[i][second] = moveCards.remove(cnt);
+                ++cnt;
+            }
+        }
+    }
+
     //////////////////////////////////////////////////////////////////////////////////////////////
     // PRINTING METHODS
     public void printBoard() {
@@ -141,25 +191,6 @@ public class gameState {
             }
 
         }
-
-        /*
-         * int cnt = 0;
-         * //increment through the layers of the cards
-         * for(int k = 0; k < 9; ++k){
-         * //increment through the columns of the board
-         * for(int i = 0; i<gameBoard[0].length; ++i){
-         * //increment through the Cards in the array
-         * for(int j = 0; j < cards.length-1; ++j){
-         * if(cards[j].equals(Player.get(i).getCard())){
-         * String me = cards[j+1].substring(cnt, cnt + 11);
-         * System.out.print(me);
-         * }
-         * }
-         * }
-         * System.out.println();
-         * cnt += 11;
-         * }
-         */
     }
 
     public void tempPrint() {

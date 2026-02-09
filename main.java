@@ -13,7 +13,7 @@ public class main {
             game.printBoard();
             //game.tempPrint();
 
-            System.out.print("Move card, Draw card, or Score card? ");
+            System.out.print("Move card, Move card from draw pile, Draw card, or Score card? ");
             String choice=input.next();
             System.out.println();
             choice=choice.toLowerCase();
@@ -30,6 +30,13 @@ public class main {
                 System.out.println();
 
                 game.validateMoveCard(first-1, second-1, cardNumber-1);
+            }
+            if(choice.equals("move from draw")){
+                System.out.print("Which column are you moving to? ");
+                int second = input.nextInt();
+                System.out.println();
+
+                game.validateMoveFromDraw(second-1);
             }
             if(choice.equals("draw")){
                 game.draw();

@@ -21,12 +21,14 @@ public class deck {
     }
 
     public void shuffle() {
-        for (int lcv = 0; lcv < cardDeck.size(); lcv++) {
-            int ran = (int) (Math.random() * cardDeck.size());
-            card temp = cardDeck.get(ran);
-            card ind = cardDeck.get(lcv);
-            cardDeck.set(lcv, temp);
-            cardDeck.set(ran, ind);
+        for (int i = 0; i < 100; ++i) {
+            for (int lcv = 0; lcv < cardDeck.size(); lcv++) {
+                int ran = (int) (Math.random() * cardDeck.size());
+                card temp = cardDeck.get(ran);
+                card ind = cardDeck.get(lcv);
+                cardDeck.set(lcv, temp);
+                cardDeck.set(ran, ind);
+            }
         }
     }
 
@@ -41,9 +43,9 @@ public class deck {
         return cardDeck;
     }
 
-    public card[] newGame(){
+    public card[] newGame() {
         card[] gameCards = new card[28];
-        for(int i = 0; i<gameCards.length; ++i){
+        for (int i = 0; i < gameCards.length; ++i) {
             gameCards[i] = draw();
         }
         return gameCards;

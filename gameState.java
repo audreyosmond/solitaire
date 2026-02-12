@@ -3,15 +3,15 @@ import java.util.*;
 public class gameState {
     private deck deck = new deck();
     private Stack<card> drawPile = new Stack<card>();
-    private card[][] scoring = new card[13][4];
+    private Stack<card>[] scoring = new Stack[4];
     private card[][] gameBoard = new card[20][7];
 
     public gameState() {
     }
 
     public void newGame() {
-        card[] cards = deck.newGame();
         deck.shuffle();
+        card[] cards = deck.newGame();
         int cnt = 0;
         for (int i = 0; i < gameBoard[0].length; ++i) {
             for (int j = 0; j <= i; ++j) {
@@ -26,13 +26,18 @@ public class gameState {
     }
 
     public void draw() {
+        if (deck.isEmpty()) {
+            while (drawPile.size() != 0) {
+                deck.add(drawPile.pop());
+            }
+        }
         drawPile.add(deck.draw());
     }
 
     public void validateMoveCard(int first, int second, int cardNumber) {
         // Crating the cards we are using for checks
         card currentCard = gameBoard[cardNumber][first]; // fix edge case
-        if(currentCard == null){
+        if (currentCard == null) {
             System.out.println("Invalid move");
             return;
         }
@@ -51,7 +56,6 @@ public class gameState {
             return;
         }
 
-        
         System.out.println(currentCard.getVisibiliy());
         System.out.println(!currentCard.getColor().equals(futureCard.getColor()));
         System.out.println(currentCard.getValue() == futureCard.getValue() - 1);
@@ -74,7 +78,7 @@ public class gameState {
         }
 
         // Flip the next Card in list
-        for (int i = 0; i < gameBoard.length-1; ++i) {
+        for (int i = 0; i < gameBoard.length - 1; ++i) {
             if (gameBoard[i + 1][first] == null && gameBoard[i][first] != null) {
                 gameBoard[i][first].flip();
             }
@@ -90,10 +94,10 @@ public class gameState {
         }
     }
 
-    public void validateMoveFromDraw(int second){
+    public void validateMoveFromDraw(int second) {
         // Crating the cards we are using for checks
         card currentCard = drawPile.peek(); // fix edge case
-        if(currentCard == null){
+        if (currentCard == null) {
             System.out.println("Invalid move");
             return;
         }
@@ -112,10 +116,9 @@ public class gameState {
             return;
         }
 
-        
-        System.out.println(currentCard.getVisibiliy());
-        System.out.println(!currentCard.getColor().equals(futureCard.getColor()));
-        System.out.println(currentCard.getValue() == futureCard.getValue() - 1);
+        //System.out.println(currentCard.getVisibiliy());
+        //System.out.println(!currentCard.getColor().equals(futureCard.getColor()));
+        //System.out.println(currentCard.getValue() == futureCard.getValue() - 1);
         if (currentCard.getVisibiliy() && !currentCard.getColor().equals(futureCard.getColor())
                 && currentCard.getValue() == futureCard.getValue() - 1) {
             moveDrawCard(second);
@@ -124,7 +127,7 @@ public class gameState {
         }
     }
 
-    public void moveDrawCard(int second){
+    public void moveDrawCard(int second) {
         // Find and grab all cards asked for and put into ArrayList
         ArrayList<card> moveCards = new ArrayList<>();
         moveCards.add(drawPile.pop());
@@ -136,6 +139,24 @@ public class gameState {
                 gameBoard[i][second] = moveCards.remove(cnt);
                 ++cnt;
             }
+        }
+    }
+
+    public void score(int column){
+        card scoringCard = null;
+        for(int i = 0; i < gameBoard.length-1; ++i){
+            if(gameBoard[i+1][column] == null){
+                scoringCard = gameBoard[i][column];
+            }
+        }
+        if(scoringCard == null){
+            System.out.println("Invalid move");
+            return;
+        }
+        String suit = scoringCard.getSuit();
+        
+        if(suit.equals("Spades")){
+            
         }
     }
 
@@ -157,7 +178,9 @@ public class gameState {
 
         for (int i = 0; i < gameBoard.length; ++i) {
             int cnt = 0;
+            
             for (int c = 0; c < 9; c++) {
+                int allNulls = 0;
                 if (i >= 1) {
                     System.out.print("           ");
                 }
@@ -167,6 +190,10 @@ public class gameState {
                 for (int j = 0; j < gameBoard[0].length; ++j) {
                     if (gameBoard[i][j] == null) {
                         System.out.print("           ");
+                        ++allNulls;
+                        if (allNulls == gameBoard[0].length) {
+                            return;
+                        }
                         continue;
                     }
                     // The card we need to print
@@ -189,7 +216,6 @@ public class gameState {
                 System.out.println();
                 cnt += 11;
             }
-
         }
     }
 

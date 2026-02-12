@@ -32,11 +32,17 @@ public class deck {
         }
     }
 
+    //Not needed based on draw method in gameState class
+    /* 
     public void shuffledraw(card[] cards) {
         for (card c : cards) {
             cardDeck.add(c);
         }
         shuffle();
+    }
+        */
+    public void add(card card){
+        cardDeck.add(card);
     }
 
     public ArrayList<card> getdeck() {
@@ -49,6 +55,15 @@ public class deck {
             gameCards[i] = draw();
         }
         return gameCards;
+    }
+
+    public boolean isEmpty(){
+        if(cardDeck.size() > 0){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
 }

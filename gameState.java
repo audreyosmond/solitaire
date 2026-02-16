@@ -3,13 +3,16 @@ import java.util.*;
 public class gameState {
     private deck deck = new deck();
     private Stack<card> drawPile = new Stack<card>();
-    private Stack<card>[] scoring = new Stack[4];
+    private ArrayList<Stack<card>> scoring = new ArrayList<>();
     private card[][] gameBoard = new card[20][7];
 
     public gameState() {
     }
 
     public void newGame() {
+        for (int i = 0; i < 4; ++i) {
+            scoring.add(new Stack<card>());
+        }
         deck.shuffle();
         card[] cards = deck.newGame();
         int cnt = 0;
@@ -56,9 +59,9 @@ public class gameState {
             return;
         }
 
-        System.out.println(currentCard.getVisibiliy());
-        System.out.println(!currentCard.getColor().equals(futureCard.getColor()));
-        System.out.println(currentCard.getValue() == futureCard.getValue() - 1);
+        //System.out.println(currentCard.getVisibiliy());
+        //System.out.println(!currentCard.getColor().equals(futureCard.getColor()));
+        //System.out.println(currentCard.getValue() == futureCard.getValue() - 1);
         if (currentCard.getVisibiliy() && !currentCard.getColor().equals(futureCard.getColor())
                 && currentCard.getValue() == futureCard.getValue() - 1) {
             moveCard(first, second, cardNumber);
@@ -116,9 +119,9 @@ public class gameState {
             return;
         }
 
-        //System.out.println(currentCard.getVisibiliy());
-        //System.out.println(!currentCard.getColor().equals(futureCard.getColor()));
-        //System.out.println(currentCard.getValue() == futureCard.getValue() - 1);
+        // System.out.println(currentCard.getVisibiliy());
+        // System.out.println(!currentCard.getColor().equals(futureCard.getColor()));
+        // System.out.println(currentCard.getValue() == futureCard.getValue() - 1);
         if (currentCard.getVisibiliy() && !currentCard.getColor().equals(futureCard.getColor())
                 && currentCard.getValue() == futureCard.getValue() - 1) {
             moveDrawCard(second);
@@ -142,21 +145,122 @@ public class gameState {
         }
     }
 
-    public void score(int column){
+    public void score(int column) {
         card scoringCard = null;
-        for(int i = 0; i < gameBoard.length-1; ++i){
-            if(gameBoard[i+1][column] == null){
+        int spot = -1;
+        for (int i = 0; i < gameBoard.length - 1; ++i) {
+            if (gameBoard[i + 1][column] == null) {
                 scoringCard = gameBoard[i][column];
+                spot = i;
+                break;
             }
         }
-        if(scoringCard == null){
+        if (scoringCard == null) {
             System.out.println("Invalid move");
+            System.out.println("Kill me");
             return;
         }
         String suit = scoringCard.getSuit();
-        
-        if(suit.equals("Spades")){
-            
+
+        /*
+         * 0 = spades
+         * 1 = clubs
+         * 2 = hearts
+         * 3 = diamonds
+         */
+        if (suit.equals("Spades")) {
+            if (scoring.get(0).isEmpty()) {
+                // If the Spades scoring area is empty and if the card is an ace, score it
+                if (scoringCard.getValue() == 1) {
+                    scoring.get(0).add(scoringCard);
+                    gameBoard[spot][column] = null;
+                } else {
+                    System.out.println("Invalid move");
+                    System.out.println("SpadeACE");
+                }
+                return;
+            } else {
+                // Spades scoring area has at least an ace. Check if the scoring card is the
+                // next level higher. If so add it, if not return "Invalid move"
+                card currCard = scoring.get(0).peek();
+                if (scoringCard.getValue() - 1 == currCard.getValue()) {
+                    scoring.get(0).add(scoringCard);
+                    gameBoard[spot][column] = null;
+                } else {
+                    System.out.println("Invalid move");
+                }
+                return;
+            }
+        } else if (suit.equals("Clubs")) {
+            if (scoring.get(1).isEmpty()) {
+                // If the Clubs scoring area is empty and if the card is an ace, score it
+                if (scoringCard.getValue() == 1) {
+                    scoring.get(1).add(scoringCard);
+                    gameBoard[spot][column] = null;
+                } else {
+                    System.out.println("Invalid move");
+                    System.out.println("ClubACE");
+                }
+                return;
+            } else {
+                // Clubs scoring area has at least an ace. Check if the scoring card is the next
+                // level higher. If so add it, if not return "Invalid move"
+                card currCard = scoring.get(1).peek();
+                if (scoringCard.getValue() - 1 == currCard.getValue()) {
+                    scoring.get(1).add(scoringCard);
+                    gameBoard[spot][column] = null;
+                } else {
+                    System.out.println("Invalid move");
+                }
+                return;
+            }
+        } else if (suit.equals("Hearts")) {
+            if (scoring.get(2).isEmpty()) {
+                // If the Hearts scoring area is empty and if the card is an ace, score it
+                if (scoringCard.getValue() == 1) {
+                    scoring.get(2).add(scoringCard);
+                    gameBoard[spot][column] = null;
+                } else {
+                    System.out.println("Invalid move");
+                    System.out.println("HeartsACE");
+                }
+                return;
+            } else {
+                // Hearts scoring area has at least an ace. Check if the scoring card is the
+                // next level higher. If so add it, if not return "Invalid move"
+                card currCard = scoring.get(2).peek();
+                if (scoringCard.getValue() - 1 == currCard.getValue()) {
+                    scoring.get(2).add(scoringCard);
+                    gameBoard[spot][column] = null;
+                } else {
+                    System.out.println("Invalid move");
+
+                }
+                return;
+            }
+        } else if (suit.equals("Diamonds")) {
+            if (scoring.get(3).isEmpty()) {
+                // If the Diamonds scoring area is empty and if the card is an ace, score it
+                if (scoringCard.getValue() == 1) {
+                    scoring.get(3).add(scoringCard);
+                    gameBoard[spot][column] = null;
+                } else {
+                    System.out.println("Invalid move");
+                    System.out.println("DiaomondsACE");
+                }
+                return;
+            } else {
+                // Diamonds scoring area has at least an ace. Check if the scoring card is the
+                // next level higher. If so add it, if not return "Invalid move"
+                card currCard = scoring.get(3).peek();
+                if (scoringCard.getValue() - 1 == currCard.getValue()) {
+                    scoring.get(3).add(scoringCard);
+                    gameBoard[spot][column] = null;
+                } else {
+                    System.out.println("Invalid move");
+                }
+                return;
+            }
         }
     }
 
@@ -178,15 +282,16 @@ public class gameState {
 
         for (int i = 0; i < gameBoard.length; ++i) {
             int cnt = 0;
-            
+
             for (int c = 0; c < 9; c++) {
                 int allNulls = 0;
-                if (i >= 1) {
+                // FOR DRAW PILE
+                if (i == 0) {
+                    System.out.print(drawnCard.substring(cnt, cnt + 11));
+                } else {
                     System.out.print("           ");
                 }
-                if (i < 1) {
-                    System.out.print(drawnCard.substring(cnt, cnt + 11));
-                }
+                // ACTUAL GAME BOARD
                 for (int j = 0; j < gameBoard[0].length; ++j) {
                     if (gameBoard[i][j] == null) {
                         System.out.print("           ");
@@ -213,6 +318,34 @@ public class gameState {
                     System.out.print(cardToPrint.substring(cnt, cnt + 11));
                 }
 
+                // FOR SCORING PILES
+                if (i == 0) {
+                    System.out.print("      ");
+                    // If pile is empty print the blank card
+
+                    
+                for(int p = 0; p<4; ++p){
+                    if (scoring.get(p).isEmpty()) {
+                        String spadePile = "Empty";
+                        for (int k = 0; k < cards.length - 1; ++k) {
+                            if (cards[k].equals(spadePile)) {
+                                cardToPrint = cards[k + 1];
+                            }
+                        }
+                        System.out.print(cardToPrint.substring(cnt, cnt + 11));
+                    } 
+                    else {
+                        String spadePile = scoring.get(p).peek().getValue() + scoring.get(p).peek().getSuit();
+                        for (int k = 0; k < cards.length - 1; ++k) {
+                            if (cards[k].equals(spadePile)) {
+                                cardToPrint = cards[k + 1];
+                            }
+                        }
+                        System.out.print(cardToPrint.substring(cnt, cnt + 11));
+                    }
+                }
+                }
+                // end
                 System.out.println();
                 cnt += 11;
             }

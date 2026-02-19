@@ -3,7 +3,7 @@
 This was a group project of three programmers to make the card game Solitare. In order to become more comfterable with Git/Githubs ability to create branches and work on group projects.
 In the end it turned out pretty good. It is littered with edge cases so play carefully.
 I spent way more time on this that I would have like to but maybe one day I'll come back to it to fix some cases and flush out gameplay. 
-Possibly even one of my other fellow programmers would like to add something to this in the future, but I doubt they even remember this project enough to find out I wrote a ReadME for it.
+Possibly even one of my other fellow programmers would like to add something to this in the future, but since the two of them combined only made the Deck, Card, and Main classes plus I don't they even remember this project enough to ever come back to find out I wrote a ReadME for it, I highly doubt that is a possibility.
 
 
 ![sadThumbsUpCat](https://github.com/user-attachments/assets/fb524e4b-2128-48a4-8109-82da35fcaeec)

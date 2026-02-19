@@ -21,32 +21,49 @@ public class deck {
     }
 
     public void shuffle() {
-        for (int lcv = 0; lcv < cardDeck.size(); lcv++) {
-            int ran = (int) (Math.random() * cardDeck.size());
-            card temp = cardDeck.get(ran);
-            card ind = cardDeck.get(lcv);
-            cardDeck.set(lcv, temp);
-            cardDeck.set(ran, ind);
+        for (int i = 0; i < 100; ++i) {
+            for (int lcv = 0; lcv < cardDeck.size(); lcv++) {
+                int ran = (int) (Math.random() * cardDeck.size());
+                card temp = cardDeck.get(ran);
+                card ind = cardDeck.get(lcv);
+                cardDeck.set(lcv, temp);
+                cardDeck.set(ran, ind);
+            }
         }
     }
 
+    //Not needed based on draw method in gameState class
+    /* 
     public void shuffledraw(card[] cards) {
         for (card c : cards) {
             cardDeck.add(c);
         }
         shuffle();
     }
+        */
+    public void add(card card){
+        cardDeck.add(card);
+    }
 
     public ArrayList<card> getdeck() {
         return cardDeck;
     }
 
-    public card[] newGame(){
+    public card[] newGame() {
         card[] gameCards = new card[28];
-        for(int i = 0; i<gameCards.length; ++i){
+        for (int i = 0; i < gameCards.length; ++i) {
             gameCards[i] = draw();
         }
         return gameCards;
+    }
+
+    public boolean isEmpty(){
+        if(cardDeck.size() > 0){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
 }

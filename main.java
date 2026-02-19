@@ -11,9 +11,10 @@ public class main {
         Scanner input=new Scanner(System.in);
         while(true){
             game.printBoard();
+            System.out.println();
             //game.tempPrint();
 
-            System.out.print("Move card, Draw card, or Score card? ");
+            System.out.print("Move card, Move card from draw pile, Draw card, or Score card? ");
             String choice=input.next();
             System.out.println();
             choice=choice.toLowerCase();
@@ -31,16 +32,20 @@ public class main {
 
                 game.validateMoveCard(first-1, second-1, cardNumber-1);
             }
+            if(choice.equals("mdraw")){
+                System.out.print("Which column are you moving to? ");
+                int second = input.nextInt();
+                System.out.println();
+
+                game.validateMoveFromDraw(second-1);
+            }
             if(choice.equals("draw")){
                 game.draw();
             }
             if(choice.equals("score")){
                 System.out.print("Which column are you scoring from? ");
                 int column=input.nextInt();
-                System.out.println();
-                System.out.print("Which card are you scoring? ");
-                int cardNumber=input.nextInt();
-                //game.score(column , cardNumber);
+                game.score(column-1);
             }
         }
     }

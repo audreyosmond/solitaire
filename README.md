@@ -4,6 +4,8 @@ This was a group project of three programmers to make the card game Solitare. In
 In the end it turned out pretty good. It is littered with edge cases so play carefully.
 I spent way more time on this that I would have like to but maybe one day I'll come back to it to fix some cases and flush out gameplay. 
 Possibly even one of my other fellow programmers would like to add something to this in the future, but I doubt they even remember this project enough to find out I wrote a ReadME for it.
+![sadThumbsUpCat](https://github.com/user-attachments/assets/fb524e4b-2128-48a4-8109-82da35fcaeec)
+
 
 ### Rules
 Setup: Seven columns are arranged, with one card in the first, two in the second, up to seven in the last, with the top cards face up. Remaining cards form the stock pile.

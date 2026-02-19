@@ -14,7 +14,7 @@ Stock Pile: Cards are drawn from the stock to a waste pile to be used in the gam
 Winning: The game is won when all 52 cards are moved to the foundation piles. 
 
 ### Move option
-Move: moves a card/Stack of cards to the desired location
-mdraw: Moves card from draw pile to desired location
-draw: draws card
-score: will score the desired card
+- Move: moves a card/Stack of cards to the desired location
+- mdraw: Moves card from draw pile to desired location
+- draw: draws card
+- score: will score the desired card

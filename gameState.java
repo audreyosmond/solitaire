@@ -1,6 +1,8 @@
+
 import java.util.*;
 
 public class gameState {
+
     private deck deck = new deck();
     private Stack<card> drawPile = new Stack<card>();
     private ArrayList<Stack<card>> scoring = new ArrayList<>();
@@ -58,6 +60,10 @@ public class gameState {
             moveCard(first, second, cardNumber);
             return;
         }
+        else if(futureCard == null){
+            System.out.println("Invalid Move");
+            return;
+        }
 
         //System.out.println(currentCard.getVisibiliy());
         //System.out.println(!currentCard.getColor().equals(futureCard.getColor()));
@@ -90,8 +96,8 @@ public class gameState {
         // Put the cards into desired location
         int cnt = 0;
         for (int i = 0; i < gameBoard.length; ++i) {
-            if (gameBoard[i][second] == null && moveCards.size() > 0) {
-                gameBoard[i][second] = moveCards.remove(cnt);
+            if (gameBoard[i][second] == null && !moveCards.isEmpty()) {
+                gameBoard[i][second] = moveCards.remove(0);
                 ++cnt;
             }
         }
@@ -178,7 +184,7 @@ public class gameState {
                     System.out.println("Invalid move");
                     System.out.println("SpadeACE");
                 }
-                return;
+                
             } else {
                 // Spades scoring area has at least an ace. Check if the scoring card is the
                 // next level higher. If so add it, if not return "Invalid move"
@@ -189,7 +195,7 @@ public class gameState {
                 } else {
                     System.out.println("Invalid move");
                 }
-                return;
+                
             }
         } else if (suit.equals("Clubs")) {
             if (scoring.get(1).isEmpty()) {
@@ -201,7 +207,7 @@ public class gameState {
                     System.out.println("Invalid move");
                     System.out.println("ClubACE");
                 }
-                return;
+                
             } else {
                 // Clubs scoring area has at least an ace. Check if the scoring card is the next
                 // level higher. If so add it, if not return "Invalid move"
@@ -212,7 +218,7 @@ public class gameState {
                 } else {
                     System.out.println("Invalid move");
                 }
-                return;
+                
             }
         } else if (suit.equals("Hearts")) {
             if (scoring.get(2).isEmpty()) {
@@ -224,7 +230,7 @@ public class gameState {
                     System.out.println("Invalid move");
                     System.out.println("HeartsACE");
                 }
-                return;
+                
             } else {
                 // Hearts scoring area has at least an ace. Check if the scoring card is the
                 // next level higher. If so add it, if not return "Invalid move"
@@ -236,7 +242,7 @@ public class gameState {
                     System.out.println("Invalid move");
 
                 }
-                return;
+                
             }
         } else if (suit.equals("Diamonds")) {
             if (scoring.get(3).isEmpty()) {
@@ -248,7 +254,7 @@ public class gameState {
                     System.out.println("Invalid move");
                     System.out.println("DiaomondsACE");
                 }
-                return;
+                
             } else {
                 // Diamonds scoring area has at least an ace. Check if the scoring card is the
                 // next level higher. If so add it, if not return "Invalid move"
@@ -259,8 +265,11 @@ public class gameState {
                 } else {
                     System.out.println("Invalid move");
                 }
-                return;
+                
             }
+        }
+        if (spot != 0) {
+            gameBoard[spot - 1][column].flip();
         }
     }
 
@@ -323,27 +332,25 @@ public class gameState {
                     System.out.print("      ");
                     // If pile is empty print the blank card
 
-                    
-                for(int p = 0; p<4; ++p){
-                    if (scoring.get(p).isEmpty()) {
-                        String spadePile = "Empty";
-                        for (int k = 0; k < cards.length - 1; ++k) {
-                            if (cards[k].equals(spadePile)) {
-                                cardToPrint = cards[k + 1];
+                    for (int p = 0; p < 4; ++p) {
+                        if (scoring.get(p).isEmpty()) {
+                            String spadePile = "Empty";
+                            for (int k = 0; k < cards.length - 1; ++k) {
+                                if (cards[k].equals(spadePile)) {
+                                    cardToPrint = cards[k + 1];
+                                }
                             }
-                        }
-                        System.out.print(cardToPrint.substring(cnt, cnt + 11));
-                    } 
-                    else {
-                        String spadePile = scoring.get(p).peek().getValue() + scoring.get(p).peek().getSuit();
-                        for (int k = 0; k < cards.length - 1; ++k) {
-                            if (cards[k].equals(spadePile)) {
-                                cardToPrint = cards[k + 1];
+                            System.out.print(cardToPrint.substring(cnt, cnt + 11));
+                        } else {
+                            String spadePile = scoring.get(p).peek().getValue() + scoring.get(p).peek().getSuit();
+                            for (int k = 0; k < cards.length - 1; ++k) {
+                                if (cards[k].equals(spadePile)) {
+                                    cardToPrint = cards[k + 1];
+                                }
                             }
+                            System.out.print(cardToPrint.substring(cnt, cnt + 11));
                         }
-                        System.out.print(cardToPrint.substring(cnt, cnt + 11));
                     }
-                }
                 }
                 // end
                 System.out.println();

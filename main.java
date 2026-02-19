@@ -32,7 +32,7 @@ public class main {
 
                 game.validateMoveCard(first-1, second-1, cardNumber-1);
             }
-            if(choice.equals("move from draw")){
+            if(choice.equals("mdraw")){
                 System.out.print("Which column are you moving to? ");
                 int second = input.nextInt();
                 System.out.println();

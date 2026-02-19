@@ -12,3 +12,4 @@ Tableau Moves: Cards can be moved to another column if they are one rank lower a
 Empty Spaces: Only a King (or a stack starting with a King) can fill an empty column.
 Stock Pile: Cards are drawn from the stock to a waste pile to be used in the game.
 Winning: The game is won when all 52 cards are moved to the foundation piles. 
+
